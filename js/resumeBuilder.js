@@ -76,21 +76,38 @@ var education = {
 var work = {
   "jobs": [
     {
-      "employer": "",
-      "title": "",
-      "location": "",
-      "dates": "",
-      "description": ""
+      "employer": "Accruent, LLC",
+      "title": "Software Associate/Software Engineer in Test",
+      "location": "Austin, TX",
+      "dates": "2013-2015",
+      "description": "Learned how to develop .NET web applications(HTML, CSS," +
+      " JavaScript, C#, SQL Server) in two weeks.\nContributed to development" +
+      "initiatve..."
     },
     {
-      "employer": "",
-      "title": "",
-      "location": "",
-      "dates": "",
-      "description": ""
+      "employer": "Internal Revenue Service",
+      "title": "Correspondence Exam Technician",
+      "location": "Austin, TX",
+      "dates": "2008-2009",
+      "description": "Managed a caseload of 150 Correspondence audits at one" +
+      " time.\nReceived inbound customer calls to discuss tax law and details" +
+      " specific to individual taxpayer audits."
     }
   ],
-  "display": function(){}
+  "display": function(){
+    var index = 0;
+    for (job in this.jobs) {
+      var id = "job" + index;
+      var idSelector = "#job" + index;
+      $("#workExperience").append(HTMLworkStart.replace("div", 'div id="' + id + '"'));
+      $(idSelector).append(HTMLworkEmployer.replace("%data%", this.jobs[job].employer));
+      $(idSelector).append(HTMLworkTitle.replace("%data%", this.jobs[job].title));
+      $(idSelector).append(HTMLworkDates.replace("%data%", this.jobs[job].dates));
+      $(idSelector).append(HTMLworkLocation.replace("%data%", this.jobs[job].location));
+      $(idSelector).append(HTMLworkDescription.replace("%data%", this.jobs[job].description));
+      ++index;
+    }
+  }
 }
 
 var projects = {
