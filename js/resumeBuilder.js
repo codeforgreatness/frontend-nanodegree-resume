@@ -27,7 +27,8 @@ var bio = {
     //$("#topContacts").append(HTMLtwitter.replace("%data%", this.contacts.twitter));
     $("#topContacts").append(HTMLgithub.replace("%data%", this.contacts.github));
     //$("#topContacts").append(HTMLblog.replace("%data%", this.contacts.blog));
-    $("#topContacts").append(HTMLlocation.replace("%data%", this.contacts.location));
+    $("#topContacts").append(HTMLlocation.replace("%data%",
+      this.contacts.location));
     $("#header").append(HTMLbioPic.replace("%data%", this.bioPic));
     $("#header").append(HTMLwelcomeMsg.replace("%data%", this.welcomeMessage));
     $("#header").append(HTMLskillsStart);
@@ -81,8 +82,13 @@ var work = {
       "location": "Austin, TX",
       "dates": "2013-2015",
       "description": "Learned how to develop .NET web applications(HTML, CSS," +
-      " JavaScript, C#, SQL Server) in two weeks.\nContributed to development" +
-      "initiatve..."
+      " JavaScript, C#, SQL Server) in two weeks.<br>Contributed to " +
+      "development initiatve to create a single platform for multiple legacy " +
+      "products.<br>Served as Scrum Master for the development team working " +
+      "with product managers, QA engineers, and other developers.<br>" +
+      "Volunteered to develop an in-house test automation framework from the " +
+      "ground up.<br>Delivered a successful working test automation framework" +
+      " as the lone developer on the project."
     },
     {
       "employer": "Internal Revenue Service",
@@ -90,8 +96,17 @@ var work = {
       "location": "Austin, TX",
       "dates": "2008-2009",
       "description": "Managed a caseload of 150 Correspondence audits at one" +
-      " time.\nReceived inbound customer calls to discuss tax law and details" +
+      " time.<br>Received inbound customer calls to discuss tax law and details" +
       " specific to individual taxpayer audits."
+    },
+    {
+      "employer": "United States Army",
+      "title": "Combat Medic",
+      "location": "San Antonio, TX",
+      "dates": "2004-2006",
+      "description": "Led teams of two to six medics in supporting training " +
+      "missions.<br>Received an Honorable Discharge after an injury sustained" +
+      " in a training exercise."
     }
   ],
   "display": function(){
@@ -99,12 +114,18 @@ var work = {
     for (job in this.jobs) {
       var id = "job" + index;
       var idSelector = "#job" + index;
-      $("#workExperience").append(HTMLworkStart.replace("div", 'div id="' + id + '"'));
-      $(idSelector).append(HTMLworkEmployer.replace("%data%", this.jobs[job].employer));
-      $(idSelector).append(HTMLworkTitle.replace("%data%", this.jobs[job].title));
-      $(idSelector).append(HTMLworkDates.replace("%data%", this.jobs[job].dates));
-      $(idSelector).append(HTMLworkLocation.replace("%data%", this.jobs[job].location));
-      $(idSelector).append(HTMLworkDescription.replace("%data%", this.jobs[job].description));
+      $("#workExperience").append(HTMLworkStart.replace("div",
+        'div id="' + id + '"'));
+      $(idSelector).append(
+        HTMLworkEmployer.replace("%data%", this.jobs[job].employer) +
+        HTMLworkTitle.replace("%data%", this.jobs[job].title)
+      );
+      $(idSelector).append(HTMLworkDates.replace("%data%",
+        this.jobs[job].dates));
+      $(idSelector).append(HTMLworkLocation.replace("%data%",
+        this.jobs[job].location));
+      $(idSelector).append(HTMLworkDescription.replace("%data%",
+        this.jobs[job].description));
       ++index;
     }
   }
@@ -113,19 +134,38 @@ var work = {
 var projects = {
   "projects": [
     {
-      "title": "",
-      "dates": "",
-      "description": "",
-      "images": ""
+      "title": "Portfolio Page",
+      "dates": "2016",
+      "description": "A portfolio page to feature all of my projects using " +
+      "Bootstrap for responsiveness",
+      "images": "http://placehold.it/100x100"
     },
     {
-      "title": "",
-      "dates": "",
-      "description": "",
-      "images": ""
+      "title": "Resume Page",
+      "dates": "2016",
+      "description": "A resume page created using javascript to flesh out a " +
+      "bare-bones HTML template.",
+      "images": "http://placehold.it/100x100"
     }
   ],
-  "display": function(){}
+  "display": function(){
+    var index = 0;
+    for(project in this.projects){
+      var id = "project" + index;
+      var idSelector = "#project" + index;
+      $("#projects").append(HTMLprojectStart.replace("div",
+        'div id="' + id + '"'));
+      $(idSelector).append(HTMLprojectTitle.replace("%data%",
+        this.projects[project].title));
+      $(idSelector).append(HTMLprojectDates.replace("%data%",
+        this.projects[project].dates));
+      $(idSelector).append(HTMLprojectDescription.replace("%data%",
+        this.projects[project].description));
+      $(idSelector).append(HTMLprojectImage.replace("%data%",
+        this.projects[project].images));
+      ++index;
+    }
+  }
 }
 
 bio.display();
