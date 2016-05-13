@@ -7,7 +7,7 @@ var bio = {
     "contacts": {
         "mobile": "956-451-0530",
         "email": "codeforgreatness@gmail.com",
-        "twitter": "@RealFriedman",
+        "twitter": "@code4greatness",
         "github": "codeforgreatness",
         "blog": "www.thecodegreatness.com",
         "location": "Austin, TX"
