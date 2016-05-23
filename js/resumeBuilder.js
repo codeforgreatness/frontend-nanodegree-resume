@@ -1,6 +1,12 @@
-/*
-This is empty on purpose! Your code to build the resume will go here.
- */
+var data = "%data%";
+var $header = $("#header");
+var $topContacts = $("#topContacts");
+var $bio = $("#bio");
+var $footerContacts = $("#footerContacts");
+var $education = $("#education");
+var $workExperience = $("#workExperience");
+var $projects = $("#projects");
+
 var bio = {
     "name": "Nathan Friedman",
     "role": "Web Developer",
@@ -30,26 +36,32 @@ var bio = {
     "git",
     "ASP.NET MVC"
   ],
-    "bioPic": "images/biopic.jpg",
+    "biopic": "images/biopic.jpg",
     "display": function () {
-        $("#header").prepend(HTMLheaderRole.replace("%data%", this.role));
-        $("#header").prepend(HTMLheaderName.replace("%data%", this.name));
-        $("#topContacts").append(HTMLmobile.replace("%data%", this.contacts.mobile));
-        $("#topContacts").append(HTMLemail.replace("%data%", this.contacts.email));
-        //$("#topContacts").append(HTMLtwitter.replace("%data%", this.contacts.twitter));
-        $("#topContacts").append(HTMLgithub.replace("%data%",
+        $header.prepend(HTMLheaderRole.replace(data, this.role));
+        $header.prepend(HTMLheaderName.replace(data, this.name));
+        $topContacts.append(HTMLmobile.replace(data, this.contacts.mobile));
+        $topContacts.append(HTMLemail.replace(data, this.contacts.email));
+        $topContacts.append(HTMLtwitter.replace(data, this.contacts.twitter));
+        $topContacts.append(HTMLgithub.replace(data,
             '<a href="http://github.com/' + this.contacts.github + '">' + this.contacts.github + '</a>'));
-        //$("#topContacts").append(HTMLblog.replace("%data%", this.contacts.blog));
-        $("#topContacts").append(HTMLlocation.replace("%data%",
+        //$topContacts.append(HTMLblog.replace(data, this.contacts.blog));
+        $topContacts.append(HTMLlocation.replace(data,
             this.contacts.location));
-        $("#bio").append(HTMLbioPic.replace("%data%", this.bioPic));
-        $("#bio").append(HTMLwelcomeMsg.replace("%data%", this.welcomeMessage));
+        $bio.append(HTMLbioPic.replace(data, this.biopic));
+        $bio.append(HTMLwelcomeMsg.replace(data, this.welcomeMessage));
         $("#bioRight").append(HTMLskillsStart);
-        for (skill in this.skills) {
-            $("#skillsList").append(HTMLskills.replace("%data%", this.skills[skill]));
+        for (var i = 0, len = this.skills.length; i < len; ++i) {
+            $("#skillsList").append(HTMLskills.replace(data, this.skills[i]));
         }
+        $footerContacts.append(HTMLmobile.replace(data, this.contacts.mobile));
+        $footerContacts.append(HTMLemail.replace(data, this.contacts.email));
+        $footerContacts.append(HTMLtwitter.replace(data, this.contacts.twitter));
+        $footerContacts.append(HTMLgithub.replace(data,
+            '<a href="http://github.com/' + this.contacts.github + '">' +
+            this.contacts.github + '</a>'));
     }
-}
+};
 
 var education = {
     "schools": [
@@ -59,7 +71,7 @@ var education = {
             "degree": "Bachelor of Science - Incomplete",
             "majors": ["Computer Science", "Mathematics"],
             "dates": "2009-2013",
-            "url": "www.utexas.edu"
+            "url": "http://www.utexas.edu"
     },
         {
             "name": "University of Texas",
@@ -67,7 +79,7 @@ var education = {
             "degree": "Bachelor of Arts",
             "majors": ["Government (Political Science)", "Middle Eastern Studies"],
             "dates": "2006-2008",
-            "url": "www.utexas.edu"
+            "url": "http://www.utexas.edu"
     },
         {
             "name": "Udacity",
@@ -75,7 +87,7 @@ var education = {
             "degree": "Nanodegree",
             "majors": ["Front-End Web Development"],
             "dates": "2016-Present",
-            "url": "www.udacity.com"
+            "url": "http://www.udacity.com"
     }
   ],
     "onlineCourses": [
@@ -83,73 +95,71 @@ var education = {
             "title": "Building Web Applications with Node.js and Express 4.0",
             "school": "Pluralsight",
             "date": "2016",
-            "url": "app.pluralsight.com/courses/nodejs-express-web-applications"
+            "url": "http://app.pluralsight.com/courses/nodejs-express-web-applications"
     },
         {
             "title": "Introduction to Node.js",
             "school": "Pluralsight",
             "date": "2016",
-            "url": "app.pluralsight.com/courses/node-inro"
+            "url": "http://app.pluralsight.com/courses/node-inro"
     },
         {
             "title": "jQuery: Getting Started",
             "school": "Pluralsight",
             "date": "2016",
-            "url": "app.pluralsight.com/courses/jquery-getting-started"
+            "url": "http://app.pluralsight.com/courses/jquery-getting-started"
     },
         {
             "title": "Quick Start to JavaScript: Volume 3",
             "school": "Pluralsight",
             "date": "2016",
-            "url": "app.pluralsight.com/courses/quick-start-javascript-3-1918"
+            "url": "http://app.pluralsight.com/courses/quick-start-javascript-3-1918"
     },
         {
             "title": "Quick Start to JavaScript: Volume 2",
             "school": "Pluralsight",
             "date": "2016",
-            "url": "app.pluralsight.com/courses/quick-start-javascript-2-1917"
+            "url": "http://app.pluralsight.com/courses/quick-start-javascript-2-1917"
     },
         {
             "title": "Quick Start to JavaScript: Volume 1",
             "school": "Pluralsight",
             "date": "2016",
-            "url": "app.pluralsight.com/courses/quick-start-javascript-1-1870"
+            "url": "http://app.pluralsight.com/courses/quick-start-javascript-1-1870"
     }
   ],
     "display": function () {
-        var index = 0;
-        for (school in this.schools) {
-            var id = "school" + index;
-            var idSelector = "#school" + index;
-            $("#education").append(HTMLschoolStart.replace("div",
+        var id = "";
+        var idSelector = "";
+        for (var i = 0, len = this.schools.length; i < len; ++i) {
+            id = "school" + i;
+            idSelector = "#school" + i;
+            $education.append(HTMLschoolStart.replace("div",
                 'div id="' + id + '"'));
-            $(idSelector).append(HTMLschoolName.replace("%data%",
-                this.schools[school].name) + HTMLschoolDegree.replace("%data%",
-                this.schools[school].degree));
-            $(idSelector).append(HTMLschoolDates.replace("%data%",
-                this.schools[school].dates) + HTMLschoolLocation.replace("%data%",
-                this.schools[school].location));
-            $(idSelector).append(HTMLschoolMajor.replace("%data%",
-                this.schools[school].majors));
-            ++index;
+            $(idSelector).append(HTMLschoolName.replace(data,
+                this.schools[i].name) + HTMLschoolDegree.replace(data,
+                this.schools[i].degree));
+            $(idSelector).append(HTMLschoolDates.replace(data,
+                this.schools[i].dates) + HTMLschoolLocation.replace(data,
+                this.schools[i].location));
+            $(idSelector).append(HTMLschoolMajor.replace(data,
+                this.schools[i].majors));
         }
-        index = 0;
-        $("#education").append(HTMLonlineClasses);
-        for (course in this.onlineCourses) {
-            var id = "course" + index;
-            var idSelector = "#course" + index;
-            $("#education").append('<div id="' + id +
+        $education.append(HTMLonlineClasses);
+        for (var i = 0, len = this.onlineCourses.length; i < len; ++i) {
+            id = "course" + i;
+            idSelector = "#course" + i;
+            $education.append('<div id="' + id +
                 '" class="education-entry row"></div>');
             $(idSelector).append(HTMLonlineTitle.replace('#">%data%',
-                this.onlineCourses[course].url + '">' +
-                this.onlineCourses[course].title) + HTMLonlineSchool.replace("%data%",
-                this.onlineCourses[course].school));
-            $(idSelector).append(HTMLonlineDates.replace("%data%",
-                this.onlineCourses[course].date));
-            ++index;
+                this.onlineCourses[i].url + '">' +
+                this.onlineCourses[i].title) + HTMLonlineSchool.replace(data,
+                this.onlineCourses[i].school));
+            $(idSelector).append(HTMLonlineDates.replace(data,
+                this.onlineCourses[i].date));
         }
     }
-}
+};
 
 var work = {
     "jobs": [
@@ -187,25 +197,25 @@ var work = {
     }
   ],
     "display": function () {
-        var index = 0;
-        for (job in this.jobs) {
-            var id = "job" + index;
-            var idSelector = "#job" + index;
-            $("#workExperience").append(HTMLworkStart.replace("div",
+        var id = "";
+        var idSelector = "";
+        for (var i = 0, len = this.jobs.length; i < len; ++i) {
+            id = "job" + i;
+            idSelector = "#job" + i;
+            $workExperience.append(HTMLworkStart.replace("div",
                 'div id="' + id + '"'));
             $(idSelector).append(
-                HTMLworkEmployer.replace("%data%", this.jobs[job].employer) +
-                HTMLworkTitle.replace("%data%", this.jobs[job].title)
+                HTMLworkEmployer.replace(data, this.jobs[i].employer) +
+                HTMLworkTitle.replace(data, this.jobs[i].title)
             );
-            $(idSelector).append(HTMLworkDates.replace("%data%",
-                this.jobs[job].dates) + HTMLworkLocation.replace("%data%",
-                this.jobs[job].location));
-            $(idSelector).append(HTMLworkDescription.replace("%data%",
-                this.jobs[job].description));
-            ++index;
+            $(idSelector).append(HTMLworkDates.replace(data,
+                this.jobs[i].dates) + HTMLworkLocation.replace(data,
+                this.jobs[i].location));
+            $(idSelector).append(HTMLworkDescription.replace(data,
+                this.jobs[i].description));
         }
     }
-}
+};
 
 var projects = {
     "projects": [
@@ -214,37 +224,40 @@ var projects = {
             "dates": "2016",
             "description": "A portfolio page to feature all of my projects using " +
                 "Bootstrap for responsiveness",
-            "images": "images/portfolio.png"
+            "images": ["images/portfolio.png"]
     },
         {
             "title": "Resume Page",
             "dates": "2016",
             "description": "A resume page created using javascript to flesh out a " +
                 "bare-bones HTML template.",
-            "images": "images/resume.png"
+            "images": ["images/resume.png"]
     }
   ],
     "display": function () {
-        var index = 0;
-        for (project in this.projects) {
-            var id = "project" + index;
-            var idSelector = "#project" + index;
-            $("#projects").append(HTMLprojectStart.replace("div",
+        var id = "";
+        var idSelector = "";
+        for (var i = 0, len = this.projects.length; i < len; ++i) {
+            id = "project" + i;
+            idSelector = "#project" + i;
+            $projects.append(HTMLprojectStart.replace("div",
                 'div id="' + id + '"'));
-            $(idSelector).append(HTMLprojectTitle.replace("%data%",
-                this.projects[project].title));
-            $(idSelector).append(HTMLprojectDates.replace("%data%",
-                this.projects[project].dates));
-            $(idSelector).append(HTMLprojectDescription.replace("%data%",
-                this.projects[project].description));
-            $(idSelector).append(HTMLprojectImage.replace("%data%",
-                this.projects[project].images));
-            ++index;
+            $(idSelector).append(HTMLprojectTitle.replace(data,
+                this.projects[i].title));
+            $(idSelector).append(HTMLprojectDates.replace(data,
+                this.projects[i].dates));
+            $(idSelector).append(HTMLprojectDescription.replace(data,
+                this.projects[i].description));
+            $(idSelector).append('<div class="row"></div>');
+            var $imgRow = $(idSelector).children().last();
+            for (var j = 0, len2 = this.projects[i].images.length; j < len2; ++j) {
+                $imgRow.append(HTMLprojectImage.replace(data, this.projects[i].images[j]));
+            }
         }
     }
-}
+};
 
-function internationalizeButtonDisplay(){
+function internationalizeButtonDisplay() {
     $('#main').append(internationalizeButton);
 }
 
